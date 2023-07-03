@@ -32,9 +32,9 @@ int OnCurlResponse(const string &response)
       // A palavra-chave "barreira fiscal" foi encontrada
       Print("Encontrou a palavra-chave 'barreira fiscal' na resposta HTTP!");
    }
-  if (StringFine(response, "economy", 0) != -1)
+  if (StringFine(response, "economia", 0) != -1)
   {
-    //A palavra-chave "economy" foi encontrada 
+    //A palavra-chave "economia" foi encontrada 
     Print("Encontrou a palavra-chave'economy' na resposta HTTP!");
     
     return 0;
@@ -48,17 +48,16 @@ void GetInternetData()
    {
       Print("Erro ao inicializar a biblioteca libcurl!");
       return;
-   }
-
+}
    // Criar uma instância do objeto CURL
    CURL *curl = curl_easy_init();
    if (curl)
    {
-      // Definir a URL para obter os dados (exemplo: https://www.investing.com/)
       const string url = "https://www.investing.com/";
+ 
+       const string url = "https://edition.cnn.com/";
 
-     // definir a URL para obter os dados (exemplo: https://edition.cnn.com/)
-     const string url = https://edition.cnn.com/;
+       const string url = "https://www.infomoney.com.br/";
       
       // Definir a função de callback para processar a resposta HTTP
       curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, OnCurlResponse);
@@ -95,12 +94,13 @@ int OnInit()
 // Função de encerramento
 void OnDeinit(const int reason)
 {
-   // Nada a fazer aqui
+   
 }
 
 // Função de atualização
 void OnTick()
 {
-   // Nada a fazer aqui
 }
+   
+
 
