@@ -13,7 +13,7 @@ CNeuroTrend neuralNetwork;  // Objeto da rede neural
 void MotionPlanning()
 {
    // Lógica de planejamento de movimento
-   #include"desltaforex.mqh"
+   #include"deltaforex.mqh"
    #include"noticia.mqh"
    
     // Exemplo: Definir a direção do movimento com base nos dados
@@ -30,8 +30,8 @@ void MotionPlanning()
 void DetectArbitrageOpportunity()
 {
    // Obter cotações de diferentes corretoras ou feeds de dados
-   double price1 = SymbolInfoDouble(_Symbol, SYMBOL_BID);
-   double price2 = SymbolInfoDouble("SYMBOL2", SYMBOL_BID);
+   double price1 = SymbolInfoDouble(<symbol.mqh>, SYMBOL_BID);
+   double price2 = SymbolInfoDouble("<symbol.mqh>2", SYMBOL_BID);
    // ...
 
    // Calcular a diferença de preço entre os mercados
@@ -41,8 +41,8 @@ void DetectArbitrageOpportunity()
    // Verificar se a diferença de preço atende aos critérios de arbitragem
    if (priceDifference > threshold)
    {
-      // Realizar ações de arbitragem
-      // ...
+     
+     
    }
 }
 
@@ -101,7 +101,7 @@ double NeuralNetworkPrediction(const double inputs[])
 int OnInit()
 {
    // Configurar a rede neural
-   neuralNetwork.Create(4, 5, 1);  // Exemplo: 4 entradas, 5 neurônios na camada oculta, 1 saída
+   neuralNetwork.Create(200, 400, 1);  // Exemplo: 4 entradas, 5 neurônios na camada oculta, 1 saída
 
    // Treinar a rede neural (exemplo de treinamento)
    double trainingData[][4] = {
