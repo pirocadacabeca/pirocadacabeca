@@ -101,7 +101,6 @@ bool ShouldEnterTrade(double price, datetime time)
   #include<noticia.mqh>
   #include<arbitrage.mqh>
 
-   return false; // Substitua pelo seu critério de entrada
 }
 
 //+------------------------------------------------------------------+
@@ -112,7 +111,7 @@ bool ShouldExitTrade(double price, datetime time)
    // Implementar suas condições para fechar uma negociação
    // Exemplo: vender se o preço atingir um nível de take profit
 
-   return false; // Substitua pelo seu critério de saída
+   return false; take profit 
 }
 
 //+------------------------------------------------------------------+
@@ -124,7 +123,7 @@ void OpenTrade()
    // Exemplo: enviar uma ordem de compra com volume definido
 
    // Exemplo de ordem de compra:
-   // OrderSend(_Symbol, OP_BUY, volume, Ask, slippage, stopLoss, takeProfit, "Comentário");
+   // OrderSend(<symbol>, OP_BUY, <volume.mqh>, Ask, 0,<eastop.mqh>, "Comentário");
 
    // Registrar informações sobre a negociação aberta, como preço de entrada, volume, etc.
 }
@@ -134,11 +133,8 @@ void OpenTrade()
 //+------------------------------------------------------------------+
 void CloseTrade()
 {
-   // Implementar a lógica para fechar uma negociação
-   // Exemplo: fechar uma posição com lucro
-
-   // Exemplo de fechamento de posição:
-   // OrderClose(positionTicket, positionLots, Bid, slippage, color);
+  
+   // OrderClose(<eastop.mqh>);
 
    // Registrar informações sobre a negociação fechada, como preço de saída, lucro, etc.
 }
@@ -153,7 +149,8 @@ void CloseTrade()
 //+------------------------------------------------------------------+
 void OnTick()
 {
-   // Implemente sua lógica de negociação aqui
+   return false
+
    
 
 }
