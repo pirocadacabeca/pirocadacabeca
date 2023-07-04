@@ -208,10 +208,144 @@ void OnDeinit(const int reason)
 // Função de atualização
 void OnTick()
 }
+
+#include <NeuroTrend.h>
+
+// Variáveis globais
+CNeuroTrend neuralNetwork;  // Objeto da rede neural
+
+// Função para realizar o planejamento de movimento
+void MotionPlanning()
 {
-#include<tecnica.mqh>
-#include<gestaoderisco.mqg
+   // Lógica de planejamento de movimento
+   #include"deltaforex.mqh"
+   #include"noticia.mqh"
+   
+    // Exemplo: Definir a direção do movimento com base nos dados
+   double movementDirection = 0.5;  // Valor de exemplo
+   
+   // Realizar ações com base no planejamento de movimento
+   //+------------------------------------------------------------------+
+//|               Código MQL5 para detecção de arbitragem            |
+//+------------------------------------------------------------------+
+
+//+------------------------------------------------------------------+
+//| Função para detecção de oportunidades de arbitragem              |
+//+------------------------------------------------------------------+
+void DetectArbitrageOpportunity()
+{
+   // Obter cotações de diferentes corretoras ou feeds de dados
+   double price1 = SymbolInfoDouble(<symbol.mqh>, SYMBOL_BID);
+   double price2 = SymbolInfoDouble("<symbol.mqh>2", SYMBOL_BID);
+   // ...
+
+   // Calcular a diferença de preço entre os mercados
+   double priceDifference = price1 - price2;
+   // ...
+
+   // Verificar se a diferença de preço atende aos critérios de arbitragem
+   if (priceDifference > threshold)
+   {
+     
+     
+   }
 }
+
+//+------------------------------------------------------------------+
+//| Função de inicialização                                           |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+   // Configurar as conexões com as corretoras ou feeds de dados
+   // ...
+
+   return INIT_SUCCEEDED;
+}
+
+//+------------------------------------------------------------------+
+//| Função de encerramento                                            |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+{
+   // Desconectar das corretoras ou feeds de dados
+   // ...
+}
+
+//+------------------------------------------------------------------+
+//| Função de atualização                                             |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+   // Detectar oportunidades de arbitragem
+   DetectArbitrageOpportunity();
+
+}
+
+// Função para realizar a previsão usando a rede neural
+double NeuralNetworkPrediction(const double inputs[])
+{
+   // Preparar os dados de entrada para a rede neural
+   int inputCount = neuralNetwork.InputLayerCount();
+   double normalizedInputs[inputCount];
+
+   for (int i = 0; i < inputCount; i++)
+   {
+      normalizedInputs[i] = neuralNetwork.NormalizeInput(inputs[i]);
+   }
+
+   // Fazer a previsão usando a rede neural
+   double prediction = neuralNetwork.FeedForward(normalizedInputs);
+
+   // Desnormalizar a saída da rede neural
+   double denormalizedPrediction = neuralNetwork.DenormalizeOutput(prediction);
+
+   return denormalizedPrediction;
+}
+
+// Função de inicialização
+int OnInit()
+{
+   // Configurar a rede neural
+   neuralNetwork.Create(200, 400, 1);  // Exemplo: 4 entradas, 5 neurônios na camada oculta, 1 saída
+
+   // Treinar a rede neural (exemplo de treinamento)
+   double trainingData[][4] = {
+      {0.2, 0.3, 0.4, 0.5},
+      {0.1, 0.4, 0.6, 0.8},
+      // ...
+   };
+   double trainingLabels[] = {0.1, 0.5, /* ... */};
+   int trainingDataCount = ArraySize(trainingData);
+
+   for (int i = 0; i < trainingDataCount; i++)
+   {
+      double prediction = NeuralNetworkPrediction(trainingData[i]);
+      neuralNetwork.Backpropagate(prediction, trainingLabels[i]);
+   }
+
+   return INIT_SUCCEEDED;
+}
+
+// Função de encerramento
+void OnDeinit(const int reason)
+{
+   // Nada a fazer aqui
+}
+
+// Função de atualização
+void OnTick()
+{
+   // Dados de exemplo para a previsão
+   double input[] = {0.2, 0.4, 0.6, 0.8};
+
+   // Fazer a previsão usando a rede neural
+   double prediction = NeuralNetworkPrediction(input);
+
+   // Realizar ações com base na previsão
+   // ...
+
+   // Realizar o planejamento de movimento
+   MotionPlanning();
 opentrade()
 
 return Init_SUCEEDED 
