@@ -653,9 +653,11 @@ void OpenTrade()
 void CloseTrade()
 {
   
-   // OrderClose(<eastop.mqh>);
+if (OrderClose(<eastop.mqh>));
 
-   // Registrar informações sobre a negociação fechada, como preço de saída, lucro, etc.
+   Print("ordem aberta com sucesso")
+
+INIT_SUCEEDED
 }
 
 
