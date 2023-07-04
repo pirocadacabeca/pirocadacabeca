@@ -57,10 +57,7 @@ bool IsAnomaly(double value)
 //+------------------------------------------------------------------+
 void HandleAnomaly(double value)
 {
-   // Implementar a lógica para lidar com a anomalia
-   // Exemplo: comprar o mais barato e vender o mais caro 
-   // lucro>que taxas
-
-   // Exemplo de envio de notificação por email:
-   // SendMail("gabrielvalente824@gmail.com", "executado arbitrage_synbol", "Anomalia detectada: " + DoubleToString(value));
+ if ( lucro > taxa ( op_BUY , 1 )
+  
+SendMail("gabrielvalente824@gmail.com", "executado arbitrage_synbol", "Anomalia detectada: " + DoubleToString(value));
 }
