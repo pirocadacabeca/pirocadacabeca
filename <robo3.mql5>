@@ -1,0 +1,78 @@
+
+double entryPrice = 0.0;     // Preço de entrada da posição
+double stopLoss = 0,1*(entryPrice);       // Preço de stop-loss
+double takeProfit = 10*(stopLoss);     // Preço de take-profit
+bool positionOpened = false; // Flag para indicar se a posição está aberta
+
+// Função para abrir uma posição
+void OpenPosition(const double price, const double sl, const double tp)
+{
+    // Verificar se já há uma posição aberta
+    if (positionOpened)
+    {
+        Print("Já existe uma posição aberta!");
+        return;
+    }
+
+    // Realizar ações de abertura da posição
+    Print("Abrindo posição com preço de entrada ", price, ", stop-loss em ", sl, " e take-profit em ", tp);
+    
+    // Definir os valores de gerenciamento de risco
+    entryPrice = price;
+    stopLoss = sl;
+    takeProfit = tp;
+    positionOpened = true;
+}
+
+// Função para fechar uma posição
+void ClosePosition()
+{
+    // Verificar se não há uma posição aberta
+    if (!positionOpened)
+    {
+        Print("Não há uma posição aberta!");
+        return;
+    }
+
+    // Realizar ações de fechamento da posição
+    Print("Fechando posição");
+    
+    // Reiniciar as variáveis de gerenciamento de risco
+    entryPrice = 0.0;
+    stopLoss = 0.0;
+    takeProfit = 0.0;
+    positionOpened = false;
+}
+
+// Função de inicialização
+int OnInit()
+{
+    // Nada a fazer aqui
+    return INIT_SUCCEEDED;
+}
+
+// Função de encerramento
+void OnDeinit(const int reason)
+{
+    // Nada a fazer aqui
+}
+
+// Função de atualização
+void OnTick()
+{
+    // Exemplo: Verificar condições de entrada e saída da posição
+    double currentPrice = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+
+    // Verificar se não há uma posição aberta e atender às condições de entrada
+    if (!positionOpened && currentPrice > 1.0)
+    {
+        // Abrir uma posição de compra
+        OpenPosition(currentPrice, currentPrice - 0.1, currentPrice + 0.2);
+    }
+
+    // Verificar se há uma posição aberta e atender às condições de saída
+    if (positionOpened && currentPrice < 0.5)
+    {
+        // Fechar a posição
+        ClosePosition();
+    }
