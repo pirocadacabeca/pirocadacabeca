@@ -48,7 +48,104 @@ void OnTick()
    // Enviar dados para o servidor VPS (exemplo)
    string message = "Dados a serem enviados para o servidor VPS";
    SocketWriteString(g_socketHandle, message);
-#include<dados>
+
+#include <curl/curl.mqh>
+
+// Função de callback para processar a resposta HTTP
+int OnCurlResponse(const string &response)
+{
+   // Verificar se a resposta contém a palavra-chave desejada
+   if (StringFind(response, "desantres", 0) != -1)
+   {
+      // A palavra-chave "desantres" foi encontrada
+      Print("Encontrou a palavra-chave 'desantres' na resposta HTTP!");
+   }
+   
+   if (StringFind(response, "taxa de juros", 0) != -1)
+   {
+      // A palavra-chave "taxa de juros" foi encontrada
+      Print("Encontrou a palavra-chave 'taxa de juros' na resposta HTTP!");
+   }
+   
+   if (StringFind(response, "guerra", 0) != -1)
+   {
+      // A palavra-chave "guerra" foi encontrada
+      Print("Encontrou a palavra-chave 'guerra' na resposta HTTP!");
+   }
+   
+   if (StringFind(response, "barreira fiscal", 0) != -1)
+   {
+      // A palavra-chave "barreira fiscal" foi encontrada
+      Print("Encontrou a palavra-chave 'barreira fiscal' na resposta HTTP!");
+   }
+  if (StringFine(response, "economia", 0) != -1)
+  {
+    //A palavra-chave "economia" foi encontrada 
+    Print("Encontrou a palavra-chave'economy' na resposta HTTP!");
+    
+    return 0;
+}
+
+// Função para obter dados da internet e processar a resposta
+void GetInternetData()
+{
+   // Inicializar a biblioteca libcurl
+   if (curl_global_init(CURL_GLOBAL_ALL) != CURLE_OK)
+   {
+      Print("Erro ao inicializar a biblioteca libcurl!");
+      return;
+}
+   // Criar uma instância do objeto CURL
+   CURL *curl = curl_easy_init();
+   if (curl)
+   {
+      const string url = "https://www.investing.com/";
+ 
+       const string url = "https://edition.cnn.com/";
+
+       const string url = "https://www.infomoney.com.br/";
+      
+      // Definir a função de callback para processar a resposta HTTP
+      curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, OnCurlResponse);
+      
+      // Definir a URL de destino
+      curl_easy_setopt(curl, CURLOPT_URL, url);
+      
+      // Realizar a solicitação HTTP e processar a resposta
+      CURLcode res = curl_easy_perform(curl);
+      
+      // Verificar se ocorreu algum erro durante a solicitação HTTP
+      if (res != CURLE_OK)
+      {
+         Print("Erro durante a solicitação HTTP: ", curl_easy_strerror(res));
+      }
+      
+      // Liberar o objeto CURL
+      curl_easy_cleanup(curl);
+   }
+
+   // Finalizar a biblioteca libcurl
+   curl_global_cleanup();
+}
+
+// Função de inicialização
+int OnInit()
+{
+   // Obter dados da internet e realizar a varredura
+   GetInternetData();
+
+   return INIT_SUCCEEDED;
+}
+
+// Função de encerramento
+void OnDeinit(const int reason)
+{
+   
+}
+
+// Função de atualização
+void OnTick()
+{
 #include<ANALISE.mqh>
 }
 {
